@@ -59,7 +59,29 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.configure(location: local1)
             return cell
         }
-    } 
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 전화걸기 alert
+        if(indexPath.row == 1){
+            let optionMenu = UIAlertController(title : "전화걸기 : " + name, message: tel1, preferredStyle: .alert)
+            let call = UIAlertController(title : "전화중 " + name, message: tel1, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler:nil)
+            let callAction = UIAlertAction(title : "전화를 거시겠습니까.", style: .default){
+                (action: UIAlertAction) -> Void in
+                call.addAction(cancelAction)
+                self.present(call, animated: true, completion: nil)
+            }
+            optionMenu.addAction(callAction)
+            optionMenu.addAction(cancelAction)
+            present(optionMenu, animated: true, completion: nil)}
+        else if(indexPath.row == 2){
+            let optionMenu = UIAlertController(title : "전체 매뉴", message: menu, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler:nil)
+            
+            optionMenu.addAction(cancelAction)
+            present(optionMenu, animated: true, completion: nil)}
+    }
 
     //
     // MARK: - Navigation
